@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using ProjectManager.Domain.Entities;
+using ProjectManager.Infra.Entities;
 using ProjectManager.Infra.EntitiesConfig;
 
 namespace ProjectManager.Infra.Contexts;
@@ -13,7 +13,8 @@ public class SqliteContext : DbContext
         _configuration = configuration;
     }
 
-    public DbSet<User> Users => Set<User>();
+    public DbSet<UserEntity> Users => Set<UserEntity>();
+    public DbSet<ProjectEntity> Projects => Set<ProjectEntity>();
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -22,6 +23,7 @@ public class SqliteContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration<User>(new UserConfiguration());
+        modelBuilder.ApplyConfiguration<UserEntity>(new UserConfiguration());
+        modelBuilder.ApplyConfiguration<ProjectEntity>(new ProjectConfiguration());
     }
 }

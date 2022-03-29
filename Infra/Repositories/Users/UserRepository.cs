@@ -1,6 +1,7 @@
 using ProjectManager.Application.Repositories.Users;
 using ProjectManager.Domain.Entities;
 using ProjectManager.Infra.Contexts;
+using ProjectManager.Infra.Entities;
 
 namespace ProjectManager.Infra.Repositories.Users;
 
@@ -15,13 +16,13 @@ public class UserRepository : IUserRepository
 
     public void Add(User entity)
     {
-        _context.Users.Add(entity);
+        _context.Users.Add(UserEntity.Of(entity));
         _context.SaveChanges();
     }
 
     public void Delete(User entity)
     {
-        _context.Users.Remove(entity);
+        _context.Users.Remove(UserEntity.Of(entity));
         _context.SaveChanges();
     }
 
@@ -32,7 +33,7 @@ public class UserRepository : IUserRepository
 
     public IEnumerable<User> GetAll()
     {
-        return _context.Users;
+        return _context.Users.Select(x => x.ToDomain()).AsEnumerable();
     }
 
     public User? GetByEmail(string email)
@@ -42,17 +43,17 @@ public class UserRepository : IUserRepository
             throw new ArgumentException($"'{nameof(email)}' cannot be null or empty.", nameof(email));
         }
 
-        return _context.Users.FirstOrDefault(x => x.Email == email);
+        return _context.Users.FirstOrDefault(x => x.Email == email)?.ToDomain();
     }
 
     public User? GetById(int id)
     {
-        return _context.Users.FirstOrDefault(x => x.Id == id);
+        return _context.Users.FirstOrDefault(x => x.Id == id)?.ToDomain();
     }
 
     public void Update(User entity)
     {
-        _context.Users.Update(entity);
+        _context.Users.Update(UserEntity.Of(entity));
         _context.SaveChanges();
     }
 }
