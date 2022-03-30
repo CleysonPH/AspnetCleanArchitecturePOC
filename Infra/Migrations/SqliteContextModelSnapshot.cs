@@ -23,7 +23,7 @@ namespace ProjectManager.Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("ConcludedAt")
+                    b.Property<DateTime?>("ConcludedAt")
                         .HasColumnType("timestamp")
                         .HasColumnName("concluded_at");
 
@@ -48,7 +48,7 @@ namespace ProjectManager.Infra.Migrations
                     b.Property<int>("ResponsableId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("StartedAt")
+                    b.Property<DateTime?>("StartedAt")
                         .HasColumnType("timestamp")
                         .HasColumnName("started_at");
 

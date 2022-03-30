@@ -30,13 +30,11 @@ public class ProjectConfiguration : IEntityTypeConfiguration<ProjectEntity>
 
         builder.Property(project => project.StartedAt)
             .HasColumnName("started_at")
-            .HasColumnType("timestamp")
-            .IsRequired();
+            .HasColumnType("timestamp");
 
         builder.Property(project => project.ConcludedAt)
             .HasColumnName("concluded_at")
-            .HasColumnType("timestamp")
-            .IsRequired();
+            .HasColumnType("timestamp");
 
         builder.Property(project => project.Status)
             .HasColumnName("status")

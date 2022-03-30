@@ -17,11 +17,13 @@ public class ProjectRepository : IProjectRepository
     public void Add(Project entity)
     {
         _context.Projects.Add(ProjectEntity.Of(entity));
+        _context.SaveChanges();
     }
 
     public void Delete(Project entity)
     {
         _context.Projects.Remove(ProjectEntity.Of(entity));
+        _context.SaveChanges();
     }
 
     public bool Exists(int id)
@@ -42,5 +44,6 @@ public class ProjectRepository : IProjectRepository
     public void Update(Project entity)
     {
         _context.Projects.Update(ProjectEntity.Of(entity));
+        _context.SaveChanges();
     }
 }

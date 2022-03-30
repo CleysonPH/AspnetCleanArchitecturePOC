@@ -8,20 +8,20 @@ public class Project
     public string Name { get; set; }
     public string? Description { get; set; }
     public DateTime CreatedAt { get; set; }
-    public DateTime StartedAt { get; set; }
-    public DateTime ConcludedAt { get; set; }
+    public DateTime? StartedAt { get; set; }
+    public DateTime? ConcludedAt { get; set; }
     public User Responsable { get; set; }
     public User Leader { get; set; }
     public Status Status { get; set; }
 
     public Project(
         string name,
-        DateTime startedAt,
-        DateTime concludedAt,
         User responsable,
         User leader,
         Status status,
-        string? description = null)
+        string? description = null,
+        DateTime? startedAt = null,
+        DateTime? concludedAt = null)
     {
         Name = name;
         Description = description;
@@ -36,12 +36,12 @@ public class Project
     public Project(
         int id,
         string name,
-        DateTime startedAt,
-        DateTime concludedAt,
         User responsable,
         User leader,
         Status status,
-        string? description = null)
+        string? description = null,
+        DateTime? startedAt = null,
+        DateTime? concludedAt = null)
     {
         Id = id;
         Name = name;
@@ -58,12 +58,6 @@ public class Project
     {
         if (string.IsNullOrEmpty(Name))
             throw new ArgumentException("Name is required");
-
-        if (StartedAt == default)
-            throw new ArgumentException("StartedAt is required");
-
-        if (ConcludedAt == default)
-            throw new ArgumentException("ConcludedAt is required");
 
         if (Responsable == null)
             throw new ArgumentException("Responsable is required");

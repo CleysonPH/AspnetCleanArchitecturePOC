@@ -11,8 +11,8 @@ using ProjectManager.Infra.Contexts;
 namespace ProjectManager.Infra.Migrations
 {
     [DbContext(typeof(SqliteContext))]
-    [Migration("20220329234859_CreateProjectTable")]
-    partial class CreateProjectTable
+    [Migration("20220329235640_CreateUserAndProjectTables")]
+    partial class CreateUserAndProjectTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,7 +25,7 @@ namespace ProjectManager.Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("ConcludedAt")
+                    b.Property<DateTime?>("ConcludedAt")
                         .HasColumnType("timestamp")
                         .HasColumnName("concluded_at");
 
@@ -50,7 +50,7 @@ namespace ProjectManager.Infra.Migrations
                     b.Property<int>("ResponsableId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("StartedAt")
+                    b.Property<DateTime?>("StartedAt")
                         .HasColumnType("timestamp")
                         .HasColumnName("started_at");
 
