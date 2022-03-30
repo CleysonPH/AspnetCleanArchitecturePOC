@@ -19,18 +19,20 @@ public class Project
         User responsable,
         User leader,
         Status status,
+        DateTime createdAt,
         string? description = null,
         DateTime? startedAt = null,
         DateTime? concludedAt = null)
     {
         Name = name;
         Description = description;
-        CreatedAt = DateTime.Now;
+        CreatedAt = createdAt;
         StartedAt = startedAt;
         ConcludedAt = concludedAt;
         Responsable = responsable;
         Leader = leader;
         Status = status;
+        ValidadeData();
     }
 
     public Project(
@@ -52,6 +54,7 @@ public class Project
         Responsable = responsable;
         Leader = leader;
         Status = status;
+        ValidadeData();
     }
 
     private void ValidadeData()
@@ -67,5 +70,8 @@ public class Project
 
         if (Status == default)
             throw new ArgumentException("Status is required");
+
+        if (CreatedAt == default)
+            throw new ArgumentException("CreatedAt is required");
     }
 }

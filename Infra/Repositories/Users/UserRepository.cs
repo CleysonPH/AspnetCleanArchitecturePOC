@@ -14,10 +14,12 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-    public void Add(User entity)
+    public User Add(User user)
     {
-        _context.Users.Add(UserEntity.Of(entity));
+        var userEntity = UserEntity.Of(user);
+        _context.Users.Add(userEntity);
         _context.SaveChanges();
+        return userEntity.ToDomain();
     }
 
     public void Delete(User entity)
@@ -51,9 +53,11 @@ public class UserRepository : IUserRepository
         return _context.Users.FirstOrDefault(x => x.Id == id)?.ToDomain();
     }
 
-    public void Update(User entity)
+    public User Update(User entity)
     {
-        _context.Users.Update(UserEntity.Of(entity));
+        var userEntity = UserEntity.Of(entity);
+        _context.Users.Update(userEntity);
         _context.SaveChanges();
+        return userEntity.ToDomain();
     }
 }

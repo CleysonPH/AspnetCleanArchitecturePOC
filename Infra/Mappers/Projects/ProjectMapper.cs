@@ -52,6 +52,7 @@ public class ProjectMapper : IProjectMapper
             responsable,
             leader,
             Status.Created,
+            DateTime.UtcNow,
             createProjectViewModel.Description
         );
     }

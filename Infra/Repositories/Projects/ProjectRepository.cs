@@ -14,10 +14,12 @@ public class ProjectRepository : IProjectRepository
         _context = context;
     }
 
-    public void Add(Project entity)
+    public Project Add(Project entity)
     {
-        _context.Projects.Add(ProjectEntity.Of(entity));
+        var projectEntity = ProjectEntity.Of(entity);
+        _context.Projects.Add(projectEntity);
         _context.SaveChanges();
+        return projectEntity.ToDomain();
     }
 
     public void Delete(Project entity)
@@ -41,9 +43,11 @@ public class ProjectRepository : IProjectRepository
         return _context.Projects.Find(id)?.ToDomain();
     }
 
-    public void Update(Project entity)
+    public Project Update(Project entity)
     {
-        _context.Projects.Update(ProjectEntity.Of(entity));
+        var projectEntity = ProjectEntity.Of(entity);
+        _context.Projects.Update(projectEntity);
         _context.SaveChanges();
+        return projectEntity.ToDomain();
     }
 }

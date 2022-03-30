@@ -28,9 +28,10 @@ public class CreateProjectUseCase : IUseCase<CreateProjectViewModel, DetailProje
         _validator.Validate(input);
 
         var project = _mapper.ToDomain(input);
+        project.CreatedAt = DateTime.UtcNow;
         project.Status = Status.Created;
 
-        _repository.Add(project);
+        project = _repository.Add(project);
 
         return _mapper.ToDetailViewModel(project);
     }

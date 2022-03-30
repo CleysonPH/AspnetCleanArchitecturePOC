@@ -8,7 +8,7 @@ using ProjectManager.Domain.Entities;
 
 namespace ProjectManager.Application.UseCases.Users;
 
-public class CreateUserUseCase : IUseCase<CreateUserViewModel, User>
+public class CreateUserUseCase : IUseCase<CreateUserViewModel, DetailUserViewModel>
 {
     private readonly IUserMapper _userMapper;
     private readonly IUserRepository _userRepository;
@@ -27,15 +27,15 @@ public class CreateUserUseCase : IUseCase<CreateUserViewModel, User>
         _passwordEncoder = passwordEncoder;
     }
 
-    public User Execute(CreateUserViewModel createUserViewModel)
+    public DetailUserViewModel Execute(CreateUserViewModel createUserViewModel)
     {
         _validator.Validate(createUserViewModel);
 
         var user = _userMapper.ToEntity(createUserViewModel);
         user.Password = _passwordEncoder.Encode(user.Password);
 
-        _userRepository.Add(user);
+        user = _userRepository.Add(user);
 
-        return user;
+        return _userMapper.ToDetailViewModel(user);
     }
 }
